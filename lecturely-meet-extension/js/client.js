@@ -205,6 +205,9 @@ function start() {
         socket.on("pvtMessage", (data) => {
             console.log("Message received!");
             console.log(data);
+            messages.classList.remove("animatefade");
+            messages.style.opacity = 1;
+            messages.classList.add("animatefade");
             // alert(data["title"] + "Message: " + data["message"]);
             messages.innerHTML += messageStructure.replace("$1", data["title"]).replace("$2", data["message"]);
         })

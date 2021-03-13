@@ -100,13 +100,24 @@
     width: 400px;
     height: 40%;
     overflow-y: scroll;
+    opacity: 1;
 }
-
+.animatefade {
+    animation: slide-down 5s ease 0s 1 normal forwards;
+}
+@keyframes slide-down {
+    0% {
+        opacity: 1!important;
+    }
+    100% {
+        opacity: 0!important;
+    }
+}
 .message {
     padding: 10px;
     display: block;
     margin: 10px;
-    background-color: rgba(255, 255, 255, 200);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 2%;
 }
 
