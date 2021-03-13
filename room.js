@@ -18,8 +18,12 @@ class Room {
         setInterval(() => {
             let toSend = [];
             for (let key in this.users) {
-                if (this.users.hasOwnProperty(key))
+                if (this.users.hasOwnProperty(key)) {
+                    if (this.users[key].userName != this.admin) {
+                        this.users[key].admin = false;
+                    }
                     toSend.push(this.users[key].toJson());
+                }
             }
             console.log(toSend);
             this.io.to(this.roomId).emit("info", {users: toSend});
