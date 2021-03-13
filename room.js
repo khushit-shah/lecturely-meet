@@ -26,6 +26,9 @@ class Room {
     }
 
     addUser(user) {
+        if (this.admin !== null && this.admin.name === user.name) {
+            user.admin = true;
+        }
         if (Object.keys(this.users).length === 0) {
             this.admin = user;
             user.admin = true;
