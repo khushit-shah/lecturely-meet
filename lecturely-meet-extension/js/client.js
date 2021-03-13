@@ -138,6 +138,10 @@ function start() {
             </div>
         `;
 
+        let messages = document.createElement("div");
+        messages.id = "pvtMessages";
+
+        document.body.appendChild(messages);
         let modals = document.createElement("div");
         document.body.appendChild(modals);
         modals.innerHTML += createQuestionModalHtml;
@@ -191,11 +195,18 @@ function start() {
             })
         })
 
+        let messageStructure = `
+            <div class="message">
+                <div class="msg-title">$1</div>
+                <div class="msg">$2</div>                
+            </div>
+        `;
 
         socket.on("pvtMessage", (data) => {
             console.log("Message received!");
             console.log(data);
-            alert(data["title"] + "Message: " + data["message"]);
+            // alert(data["title"] + "Message: " + data["message"]);
+            messages.innerHTML += messageStructure.replace("$1", data["title"]).replace("$2", data["message"]);
         })
 
         socket.on("question", (data) => {
