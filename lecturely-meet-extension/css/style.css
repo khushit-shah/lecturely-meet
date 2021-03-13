@@ -21,7 +21,7 @@
     border-radius: 50%;
     display: none;
     /*changes through javascript*/
-    z-index: 1 !important;
+    z-index: 100!important;
     background-color: red;
     opacity: 1;
 }

@@ -55,7 +55,7 @@ function start() {
         };
         console.log(basicStructure);
 
-        const socket = io("http://localhost:3000/");
+        const socket = io("https://lecturely-meet.herokuapp.com/");
 
         // create all the elements already!
         let circle = document.createElement("div");
