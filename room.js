@@ -15,10 +15,10 @@ class Room {
     // 3 - which which user are connected (admin).
     sendAllInfo() {
         setInterval(() => {
-            let toSend = {};
+            let toSend = [];
             for (let key in this.users) {
                 if (this.users.hasOwnProperty(key))
-                    toSend[key] = this.users[key].toJson();
+                    toSend.push(this.users[key].toJson());
             }
             console.log(toSend);
             this.io.to(this.roomId).emit("info", {users: toSend});

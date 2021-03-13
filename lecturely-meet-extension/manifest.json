@@ -5,13 +5,22 @@
   "description": "Make Google Meet Lectures Fun!",
   "background": {
     "persistent": true,
-    "scripts": ["js/background.js"]
+    "scripts": [
+      "js/background.js"
+    ]
   },
   "content_scripts": [
     {
-      "matches": ["https://meet.google.com/*"],
-      "js": ["js/socket.io.js","js/client.js"],
-      "css": ["css/style.css"]
+      "matches": [
+        "https://meet.google.com/*"
+      ],
+      "js": [
+        "js/socket.io.js",
+        "js/client.js"
+      ],
+      "css": [
+        "css/style.css"
+      ]
     }
   ],
   "permissions": [
