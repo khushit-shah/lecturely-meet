@@ -1,16 +1,29 @@
 const socket = io("http://localhost:3000");
 
 
+// from url.
+// easily add zoom support!
+let url = window.url;
+if (!url.startsWith("https://meet.google.com/")) {
+    throw new Error("Not in a google meet");
+}
+let roomId = url.split("https://meet.google.com/")[1].replace("/", "");
+if (roomId.length >= 14) {
+    throw new Error("To big meeting code!");
+}
+
 // from selector
-let roomId = "1234";
-let userName = Math.random().toString();
-let userImageLink = Math.random().toString();
+let sibling = document.querySelector(".QMC9Zd");
+let userSpan = sibling.parentElement.getElementsByClassName("ZjFb7c")[0];
+let userName = userSpan.innerHTML;
+let userImageLink = userSpan.parentElement.parentElement.parentElement.getElementsByTagName("img")[0].src;
 
 let basicStructure = {
     roomId: roomId,
     userName: userName,
     userImageLink: userImageLink,
 };
+
 socket.on("connect", () => {
     console.log("Client is connected to server! with id", socket.id);
     socket.emit("init", basicStructure);
