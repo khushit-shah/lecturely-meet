@@ -81,7 +81,10 @@ function start() {
         let sendPrivateMessageModal = `
             <div class="modal" id="privateMessage">
                 <div class="modal-header">Enter your Message</div>
-                <hr>
+                    <hr>
+                    <div id="old-messages">
+                       
+                   </div>
                 <select id="msg-select">
                 </select>
                 <input id="msg-input" placeholder="Enter Message Here"/>
@@ -90,6 +93,7 @@ function start() {
                     <button class="btn btn-primary" id="msg-ok">Send</button>
                     <button class="btn" id="msg-cancel">Cancel</button>
                 </div>
+                
             </div>
         `;
 
@@ -201,10 +205,20 @@ function start() {
             </div>
         `;
 
+
+        let oldMessageStructure = `
+            <div class="o-message">
+                <div class="o-msg-title">$1</div>
+                <div class="o-msg">$2</div>                
+            </div>
+            <hr>
+        `;
         socket.on("pvtMessage", (data) => {
             console.log("Message received!");
             console.log(data);
             messages.className = "";
+            let old = document.getElementById("old-messages");
+            old.innerHTML += oldMessageStructure.replace("$1", data["title"]).replace("$2", data["message"]);
             // messages.style.opacity = 1;
             setTimeout(() => {
                 messages.className = "animatefade";
@@ -239,6 +253,8 @@ function start() {
 
         function sendPvtMessage(to, msg) {
             console.log("sending private message");
+            let old = document.getElementById("old-messages");
+            old.innerHTML += oldMessageStructure.replace("$1", "To: " + to).replace("$2", msg);
             socket.emit("pvtMessage", {
                 ...basicStructure,
                 to: to,

@@ -3,6 +3,12 @@
     animation: slide-down 5s ease-in-out;
 }
 
+#old-messages {
+    height: 260px;
+    overflow: scroll;
+}
+
+
 @keyframes slide-down {
     0% {
         opacity: .20;
@@ -101,6 +107,11 @@
     height: 40%;
     overflow-y: scroll;
     /*opacity: 1;*/
+    overflow-x: fragments;
+}
+
+#pvtMessages :hover {
+    opacity: 1 !important;
 }
 
 .animatefade {
@@ -124,13 +135,31 @@
     border-radius: 2%;
 }
 
+.o-message {
+    padding: 10px;
+    display: block;
+    margin: 10px;
+    background: rgba(255, 255, 255, 0.9);
+}
+
 .msg-title {
-    color: aqua;
+    color: #5aa755;
     font-weight: bold;
     font-size: 16px;
 }
 
-.msg {
-    color: black;
+.o-msg-title {
+    color: #5aa755;
+    font-weight: bold;
     font-size: 12px;
 }
+
+.o-msg {
+    font-size: 10px;
+}
+
+.msg {
+    color: #050505;
+    font-size: 12px;
+}
+

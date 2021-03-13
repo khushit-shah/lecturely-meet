@@ -31,7 +31,7 @@ class Room {
     }
 
     addUser(user) {
-        if (this.admin !== null && this.admin.name === user.name) {
+        if (this.admin !== null && this.admin.userName.trim() === user.userName.trim()) {
             user.admin = true;
         }
         if (this.cnt === 0) {
@@ -69,7 +69,7 @@ class Room {
     questionRes(data) {
         this.users[data["userName"]]?.addQuestionScore();
         this.admin?.socket.emit("pvtMessage", {
-            title: "Question Ans | " + data["userName"],
+            title: "Ans of " + data["userName"],
             message: data["answer"],
         })
     }
@@ -83,7 +83,7 @@ class Room {
 
     pvtMessage(data) {
         this.users[data["to"]]?.socket.emit("pvtMessage", {
-            title: "Message From | " + data["userName"],
+            title: "From " + data["userName"],
             message: data["message"],
         });
     }
