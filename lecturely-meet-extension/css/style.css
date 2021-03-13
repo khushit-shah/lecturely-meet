@@ -1,0 +1,27 @@
+.circle.circle-added {
+    display: block !important;
+    animation: slide-down 5s ease-in-out;
+}
+
+@keyframes slide-down {
+    0% {
+        opacity: .20;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.circle {
+    position: absolute !important;
+    top: 0px;
+    left: 0px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: none;
+    /*changes through javascript*/
+    z-index: 1 !important;
+    background-color: red;
+    opacity: 1;
+}

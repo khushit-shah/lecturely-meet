@@ -10,7 +10,8 @@
   "content_scripts": [
     {
       "matches": ["https://meet.google.com/*"],
-      "js": ["js/socket.io.js","js/client.js"]
+      "js": ["js/socket.io.js","js/client.js"],
+      "css": ["css/style.css"]
     }
   ],
   "permissions": [
