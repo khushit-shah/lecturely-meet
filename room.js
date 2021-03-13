@@ -7,6 +7,7 @@ class Room {
         this.admin = null;
         this.createCircle();
         this.sendAllInfo();
+        this.cnt = 0;
     }
 
     // clients will need all the info to show to users,
@@ -29,7 +30,7 @@ class Room {
         if (this.admin !== null && this.admin.name === user.name) {
             user.admin = true;
         }
-        if (Object.keys(this.users).length === 0) {
+        if (this.cnt === 0) {
             this.admin = user;
             user.admin = true;
         }
@@ -41,6 +42,7 @@ class Room {
         } else {
             this.users[user.userName] = user;
         }
+        this.cnt++;
     }
 
     createCircle() {

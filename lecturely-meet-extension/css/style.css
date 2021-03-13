@@ -21,7 +21,7 @@
     border-radius: 50%;
     display: none;
     /*changes through javascript*/
-    z-index: 100!important;
+    z-index: 100 !important;
     background-color: red;
     opacity: 1;
 }
@@ -100,19 +100,22 @@
     width: 400px;
     height: 40%;
     overflow-y: scroll;
-    opacity: 1;
+    /*opacity: 1;*/
 }
+
 .animatefade {
     animation: slide-down 5s ease 0s 1 normal forwards;
 }
+
 @keyframes slide-down {
     0% {
-        opacity: 1!important;
+        opacity: 1;
     }
     100% {
-        opacity: 0!important;
+        opacity: 0;
     }
 }
+
 .message {
     padding: 10px;
     display: block;
