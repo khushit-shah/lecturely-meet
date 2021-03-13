@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Lecturely-Meet",
+  "version": "0.1",
+  "description": "Make Google Meet Lectures Fun!",
+  "background": {
+    "persistent": true,
+    "scripts": ["js/background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://meet.google.com/*"],
+      "js": ["js/socket.io.js","js/client.js"]
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "https://lecturely-meet.herokuapp.com/*"
+  ]
+}
