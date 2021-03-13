@@ -14,6 +14,8 @@ function start() {
     // from url.
     // easily add zoom support!
     let url = document.URL;
+    let users = [];
+    let admin = false;
     let roomId = url.split("https://meet.google.com/")[1].replace("/", "");
     if (roomId.length >= 14) {
         throw new Error("To big meeting code!");
@@ -76,53 +78,21 @@ function start() {
             </div>
         `;
 
-        // let temp = document.createElement("div");
-        // temp.id = "createQuestion";
-        // temp.className = "modal";
-        // let temp1 = document.createElement("input");
-        // temp1.id = "question-input";
-        // temp1.placeholder = "Enter Question here";
-        // temp.appendChild(temp1);
-        //
-        // temp1 = document.createElement("button");
-        // temp1.id = "question-cancel";
-        // temp1.className = "btn";
-        // temp1.innerHTML = "Cancel";
-        // temp.appendChild(temp1);
-        //
-        // temp1 = document.createElement("button");
-        // temp1.id = "question-ok";
-        // temp1.innerHTML = "Create";
-        // temp1.className = "btn btn-primary";
-        // temp.appendChild(temp1);
-        //
-        // document.body.appendChild(temp);
-        //
-        // temp = document.createElement("div");
-        // temp.id = "ansQuestion";
-        // temp.className = "modal";
-        // temp1 = document.createElement("div");
-        // temp1.id = "question";
-        // temp.appendChild(temp1);
-        //
-        // temp1 = document.createElement("input");
-        // temp1.id = "ans-input";
-        // temp1.placeholder = "Enter your answer here.";
-        // temp.appendChild(temp1);
-        //
-        // temp1 = document.createElement("button");
-        // temp1.id = "ans-cancel";
-        // temp1.innerHTML = "Cancel";
-        // temp1.className = "btn";
-        // temp.appendChild(temp1);
-        //
-        // temp1 = document.createElement("button");
-        // temp1.id = "ans-ok";
-        // temp1.innerHTML = "Answer";
-        // temp1.className = "btn btn-primary";
-        // temp.appendChild(temp1);
-        //
-        // document.body.appendChild(temp);
+        let sendPrivateMessageModal = `
+            <div class="modal" id="privateMessage">
+                <div class="modal-header">Enter your Message</div>
+                <hr>
+                <select id="msg-select">
+                </select>
+                <input id="msg-input" placeholder="Enter Message Here"/>
+                <hr>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="msg-ok">Send</button>
+                    <button class="btn" id="msg-cancel">Cancel</button>
+                </div>
+            </div>
+        `;
+
 
         let ansQuestionModalHtml = `
             <div class="modal" id="ansQuestion">
@@ -144,9 +114,31 @@ function start() {
         document.body.appendChild(messages);
         let modals = document.createElement("div");
         document.body.appendChild(modals);
+
         modals.innerHTML += createQuestionModalHtml;
         modals.innerHTML += ansQuestionModalHtml;
+        modals.innerHTML += sendPrivateMessageModal;
 
+        let pvtMessageButton = document.createElement("div");
+        pvtMessageButton.className = "add-question-btn";
+        pvtMessageButton.style.display = "inline-block";
+        pvtMessageButton.innerHTML = `<svg focusable="false" width="24" height="24" viewBox="0 0 24 24" class="Hdh4hc cIGbvc NMm5M"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H4V4h16v12z"></path><path d="M6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z"></path></svg>`;
+        pvtMessageButton.onclick = () => {
+            let selectOp = document.getElementById("msg-select");
+            selectOp.innerHTML = "";
+            users.forEach(user => {
+                if (user.userName == userName) return;
+                selectOp.innerHTML += "<option value='" + user.userName + "'>" + user.userName + "</option>";
+            })
+            showModal("privateMessage");
+            document.getElementById("msg-cancel").onclick = (e) => {
+                hideModal("privateMessage")
+            };
+            document.getElementById("msg-ok").onclick = (e) => {
+                sendPvtMessage(document.getElementById("msg-select").value, document.getElementById("msg-input").value);
+                hideModal("privateMessage");
+            }
+        }
 
         let createQuestionButton = document.createElement("div");
         createQuestionButton.className = "add-question-btn";
@@ -163,6 +155,7 @@ function start() {
         }
 
         document.getElementsByClassName("jzP6rf")[0]?.appendChild(createQuestionButton);
+        document.getElementsByClassName("f0WtFf")[0]?.appendChild(pvtMessageButton);
         socket.on("connect", () => {
             console.log("Client is connected to server! with id", socket.id);
             socket.emit("init", basicStructure);
@@ -185,11 +178,17 @@ function start() {
         socket.on("info", (data) => {
             console.log("Information received!");
             console.log(data);
-            let users = data["users"];
-            users.forEach(user => {
+            users = [];
+            let users_a = data["users"];
+            users_a.forEach(user => {
+                users.push(user);
                 if (user.userName === userName) {
                     if (user.admin === true) {
                         createQuestionButton.style.display = "inline-block";
+                        admin = true;
+                    } else {
+                        createQuestionButton.style.display = "none";
+                        admin = false;
                     }
                 }
             })
@@ -217,6 +216,7 @@ function start() {
         socket.on("question", (data) => {
             console.log("Question received!");
             console.log(data);
+            if (admin) return;
             document.getElementById("question").innerHTML = data["question"];
             showModal("ansQuestion");
             document.getElementById("ans-ok").onclick = () => {
