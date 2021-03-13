@@ -26,7 +26,7 @@ class Room {
     }
 
     addUser(user) {
-        if (this.users.keys().length === 0) {
+        if (Object.keys(this.users).length === 0) {
             this.admin = user;
             user.admin = true;
         }
@@ -43,7 +43,7 @@ class Room {
     createCircle() {
         // generated random number between 1min to 2min to create new circle.
         setInterval(() => {
-            if (this.users.keys().length === 0) return;
+            if (Object.keys(this.users).length === 0) return;
             this.io.to(this.roomId).emit("circle", {
                 x: 100 + Math.random() * 500,
                 y: 100 + Math.random() * 500,
