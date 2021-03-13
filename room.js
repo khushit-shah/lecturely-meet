@@ -26,7 +26,7 @@ class Room {
     }
 
     addUser(user) {
-        if (this.users.keys.length === 0) {
+        if (this.users.keys().length === 0) {
             this.admin = user;
             user.admin = true;
         }
