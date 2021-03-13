@@ -1,15 +1,17 @@
 class User {
-    constructor(userName, userImageLink) {
+    constructor(userName, userImageLink, socket) {
         this.userName = userName;
         this.userImageLink = userImageLink;
         this.score = 0;
+        this.socket = socket;
+        this.admin = false;
     }
-    addScore(data) {
-        if(data["type"] === "circleRes") {
-            if(data["resTime"] >= 5) return;
-            this.score += (5 - data["resTime"]) * 20;
-        }
+
+    addScore(resTime) {
+        if(resTime >= 5) return;
+        this.score += (5 - resTime) * 20;
     }
+
 }
 
 module.exports = User;
