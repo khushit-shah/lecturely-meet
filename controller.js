@@ -24,18 +24,25 @@ class Controller {
 
             // non admin user clicks circle.
             socket.on("circleRes", (data) => {
-                this.rooms[data["roomId"]].circleRes(data);
+                console.log(socket.id, " sent circle response!");
+                this.rooms[data["roomId"]]?.circleRes(data);
             });
 
             // non admin user answers question asked by admin.
             socket.on("ansRes", (data) => {
-                this.rooms[data["roomId"]].questionRes(data);
+                console.log(socket.id, " sent question response!");
+                this.rooms[data["roomId"]]?.questionRes(data);
             });
 
             // user pvt message another user.
             socket.on("pvtMessage", (data) => {
-                this.rooms[data["roomId"]].pvtMessage(data);
+                console.log(socket.id, " sent private message!");
+                this.rooms[data["roomId"]]?.pvtMessage(data);
             });
+
+            socket.on("createQuestion", (data) => {
+                this.rooms[data["roomId"]]?.createQuestion(data);
+            })
 
         });
 

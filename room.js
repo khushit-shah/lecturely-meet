@@ -14,7 +14,15 @@ class Room {
     // 2 - all users score (to show the scoreboard).
     // 3 - which which user are connected (admin).
     sendAllInfo() {
-        this.io.to(this.roomId).emit("info", this.users);
+        setInterval(() => {
+            let toSend = {};
+            for (let key in this.users) {
+                if (this.users.hasOwnProperty(key))
+                    toSend[key] = this.users[key].toJson();
+            }
+            console.log(toSend);
+            this.io.to(this.roomId).emit("info", {users: toSend});
+        }, 3000);
     }
 
     addUser(user) {
@@ -25,8 +33,8 @@ class Room {
         console.log("Adding a new user to the room!", user);
         if (this.users[user.userName] !== undefined) {
             // used is already present, .. so no need to do anything.
-            this.users[user.userName]?.socket = user.socket;
-            this.users[user.userName]?.admin = user.admin;
+            this.users[user.userName].socket = user.socket;
+            this.users[user.userName].admin = user.admin;
         } else {
             this.users[user.userName] = user;
         }
@@ -50,10 +58,18 @@ class Room {
     }
 
     questionRes(data) {
+        this.users[data["userName"]]?.addQuestionScore();
         this.admin?.socket.emit("pvtMessage", {
             title: "Question Ans | " + data["userName"],
             message: data["answer"],
         })
+    }
+
+    // TODO: you can add mcq type question if time permits.
+    createQuestion(data) {
+        this.io.to(this.roomId).emit("question", {
+            question: data.question
+        });
     }
 
     pvtMessage(data) {

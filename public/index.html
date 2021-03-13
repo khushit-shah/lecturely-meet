@@ -1,25 +1,6 @@
-<html>
+<html lang="en">
 <body>
 <script src="/socket.io/socket.io.js"></script>
-<script>
-    const socket = io("http://localhost:3000");
-    socket.on("connect", () => {
-        console.log("Client is connected to server! with id", socket.id);
-        socket.emit("init", {
-            roomId: "test1",
-            userName: "test2",
-            userImageLink: "test3",
-        });
-    });
-    socket.on("circle", (data) => {
-        console.log("Client got a circle", data);
-        socket.emit("circleRes", {
-            roomId: "test1",
-            userName: "test2",
-            userImageLink: "test3",
-            resTime: 3
-        })
-    });
-</script>
+<script src="client.js"></script>
 </body>
 </html>
