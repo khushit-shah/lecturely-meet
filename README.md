@@ -45,7 +45,9 @@ Just to add a bit of compeitiion, all users score will be visible to everyone (b
 
 # How everything works?
 It uses Node.js sever with express and socket.io.
+
 ![image](https://user-images.githubusercontent.com/42430171/111056362-9b4dc400-84a4-11eb-91df-e4f695089e8c.png)
+
 There will be multiple rooms, each room represents a google meet.
 There will be only one admin per room (first person to join the google meet).
 Every communication between client-server happens with socket.io emits.
