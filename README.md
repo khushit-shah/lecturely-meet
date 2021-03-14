@@ -59,6 +59,12 @@ Every communication between client-server happens with socket.io emits.
 At client side there is a chrome extension (bookmarklet didn't work :-()
 It automatically detects if you are in a meet and connects to the server!
 
+# Challenges I ran into
+I started by trying to make a bookmarklet but quicly ran into csp error! And there is not solution ot it, so, I converted to chrome extension. I had never made a chrome extension before, so this was surely fun. Then I ran into socket.io issues which also I never used before but at-last I was able to solve them all!.
+
+# Technologies I used
+JavaScript, Socket.IO, Nodejs, Chrome Extension
+
 # TODO
 1. ~~Check if same socket id if client refersh.~~
 
@@ -69,7 +75,7 @@ It automatically detects if you are in a meet and connects to the server!
 5. ~~admin will only able to create questions.~~
 6. ~~create a frontend website to add script to bookmarklet.~~
 7. ~~redesign ui.~~
-8. Make PPT.
-9. Make video.
-10. Submit!!
+8. ~~Make PPT.~~
+9. ~~Make video.~~
+10. ~~Submit!!~~
 11. ~~Have fun!~~
