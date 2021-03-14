@@ -43,6 +43,10 @@ Just to add a bit of compeitiion, all users score will be visible to everyone (b
 ![image](https://user-images.githubusercontent.com/42430171/111056318-19f63180-84a4-11eb-93a5-826b4c2168dd.png)
 ![image](https://user-images.githubusercontent.com/42430171/111056322-25e1f380-84a4-11eb-9400-0b412098271b.png)
 
+# Video 
+https://www.youtube.com/watch?v=RSh_LxoNoSQ
+
+
 # How everything works?
 It uses Node.js sever with express and socket.io.
 
