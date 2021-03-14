@@ -19,7 +19,7 @@ class Room {
             let toSend = [];
             for (let key in this.users) {
                 if (this.users.hasOwnProperty(key)) {
-                    if (this.users[key].userName != this.admin) {
+                    if (this.users[key].userName !== this.admin.userName) {
                         this.users[key].admin = false;
                     }
                     toSend.push(this.users[key].toJson());
