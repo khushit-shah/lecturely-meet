@@ -16,7 +16,7 @@ function start() {
     let url = document.URL;
     let users = [];
     let admin = false;
-    let roomId = url.split("https://meet.google.com/")[1].replace("/", "");
+    let roomId = url.split("https://meet.google.com/")[1].split("?")[0].replace("/", "");
     if (roomId.length >= 14) {
         throw new Error("To big meeting code!");
     }
@@ -195,6 +195,25 @@ function start() {
                         admin = false;
                     }
                 }
+            })
+            let scores = document.querySelectorAll(".scores");
+            scores.forEach((score) => {
+                score.remove();
+            });
+            let allUser = document.querySelectorAll(".ZjFb7c");
+            console.log(allUser);
+            allUser.forEach((userDiv) => {
+                let name = userDiv.innerHTML;
+                name = name.trim();
+                users.forEach(user => {
+                    if (user.userName.trim() === name) {
+                        let a = document.createElement("div");
+                        a.className = "scores";
+                        a.innerHTML = " " + Math.round(user.score);
+                        userDiv.parentElement.appendChild(a);
+                        return;
+                    }
+                })
             })
         })
 
