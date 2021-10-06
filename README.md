@@ -6,7 +6,7 @@ and more interactive. Are you pumped up? I will create a script/extension throug
 during the meeting and It will make attending lectures a fun game. It will show the scoreboard of how much someone was
 focused. Focus on your online lectures to be on top and flex!
 
-# What if offers?
+# What it offers?
 
 Aim with lecturely-meet was to stimulate a real classroom as much as I can.
 
